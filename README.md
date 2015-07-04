@@ -20,6 +20,6 @@ Before booting the app you must configure the app secrets.
 
 Imoni is a Rails app consuming the Anomi API backend.
 
-API delegation and ActiveRecord-like abstraction is provided by the gem [her](https://github.com/remiprev/her).
+API delegation and ActiveRecord-like abstraction are provided by the gem [her](https://github.com/remiprev/her).
 
 I like Ruby.
