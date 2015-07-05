@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
   def create
     # User chose a handle
-    if params[:user]
-      @user = User.new(user_params)
+    if params[:user] and params[:user][:handle].present?
+      @user = User.new( params[:user] )
     else
       @user = User.new
 
@@ -20,9 +20,5 @@ class UsersController < ApplicationController
     end
 
     redirect_to :back
-  end
-
-  private def user_params
-    params.require(:user).permit(:handle)
   end
 end

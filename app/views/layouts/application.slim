@@ -18,7 +18,9 @@ body.layout-full
         hr
         = link_to 'New Post', new_post_path
       - else
-        = button_to 'Create Throwaway', users_path, method: :post
+        = form_tag users_path, method: :post do
+          = text_field_tag 'user[handle]', '', placeholder: 'Handle'
+          = submit_tag 'Sign up'
 
     / Flashes
     - if flash.present?
