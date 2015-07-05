@@ -10,6 +10,19 @@ body.layout-full
     h1.logo
       = link_to 'Anomi', root_path
 
+    .user
+      - if current_user
+        = current_user.handle
+        = button_to 'X', logout_path, method: :delete, data: { confirm: "You won't be able to log back in. Are you sure?" }
+      - else
+        = button_to 'Create Throwaway', users_path, method: :post
+
+    / Flashes
+    - if flash.present?
+      .flash-messages
+        - flash.each do |key, messages|
+          div #{key}: #{messages}
+
   = yield
 
   / = javascript_include_tag 'application'

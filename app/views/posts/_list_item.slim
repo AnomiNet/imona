@@ -2,7 +2,7 @@
 .post
   h2.tldr
     = link_to by_context_post_path(post) do
-      #{ post.score } pts / #{ post.tldr }
+      span.link-body #{ post.score } pts / #{ post.tldr }
   h3.url #{ post.url }
   h3.body #{ post.body }
   h4.user By: #{ post.user.handle }

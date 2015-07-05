@@ -6,4 +6,8 @@ Rails.application.routes.draw do
       get :top
     end
   end
+
+  resources :users, only: [:create]
+
+  delete '/logout' => 'sessions#destroy', as: :logout
 end
