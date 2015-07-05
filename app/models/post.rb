@@ -1,6 +1,8 @@
 class Post
   include Her::Model
 
+  attributes :body, :child_ids, :created_at, :depth, :id, :parent_id, :root_id, :score, :tldr, :url, :user_handle, :user_id
+
   has_one :user
 
   # Thread detail; what you see when you click on a Post.

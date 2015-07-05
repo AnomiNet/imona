@@ -13,7 +13,10 @@ body.layout-full
     .user
       - if current_user
         = current_user.handle
-        = button_to 'X', logout_path, method: :delete, data: { confirm: "You won't be able to log back in. Are you sure?" }
+        / Currently destroys user account
+        = button_to 'X', logout_path, method: :delete
+        hr
+        = link_to 'New Post', new_post_path
       - else
         = button_to 'Create Throwaway', users_path, method: :post
 

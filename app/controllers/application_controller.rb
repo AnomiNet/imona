@@ -3,6 +3,15 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  # User Auth stuff
+  # ---
+
+  before_filter :set_user_token, if: :current_user
+
+  protected def set_user_token
+    RequestStore.store[:user_token] = current_user.token
+  end
+
   def current_user
     @current_user ||= load_current_user
   end

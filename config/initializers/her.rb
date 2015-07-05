@@ -1,5 +1,6 @@
 Her::API.setup url: Rails.application.secrets.api_url do |c|
   # Request
+  c.use UserTokenAuth
   c.use FaradayMiddleware::EncodeJson
 
   # Response

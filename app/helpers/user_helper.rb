@@ -1,5 +1,7 @@
 module UserHelper
-  # Set by ApplicationController
+  # User auth helpers
+  # ---
+  # Some overlap with ApplicationController
   def current_user
     @current_user ||= load_current_user
   end
