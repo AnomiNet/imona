@@ -1,11 +1,13 @@
 / Locals: post
 .post
-  h2.tldr #{ post.tldr }
+  h2.tldr
+    = link_to by_context_post_path(post) do
+      #{ post.score } pts / #{ post.tldr }
   h3.url #{ post.url }
   h3.body #{ post.body }
   h4.user By: #{ post.user.handle }
   .created_at #{ human_time( post.created_at ) } ago
   .parent In reply to: #{ post.parent_id }
-  .id ID: #{ post.id }
   .depth Depth: #{ post.depth }
   .children Replies: #{ post.child_ids }
+  .id ID: #{ post.id }
