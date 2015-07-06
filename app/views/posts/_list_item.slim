@@ -1,5 +1,16 @@
 / Locals: post
 .post
+  .voter
+    .wrap
+      .inner-wrap
+        .arrow-wrap
+          .vote.up &nbsp;
+    .wrap
+      .score #{ post.score }
+    .wrap
+      .inner-wrap
+        .arrow-wrap
+          .vote.down &nbsp;
   h2.tldr
     = link_to by_context_post_path(post) do
       span.link-body #{ post.score } pts / #{ post.tldr }

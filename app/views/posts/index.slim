@@ -1,2 +1,6 @@
+- title( truncate( @post.tldr, length: 200 ) )
+/ TODO: Use primary tag
+- header( truncate( @post.tldr, length: 30 ) )
+
 h1 Post #{ @post.id }
 = render partial: 'list', locals: { posts: @posts }

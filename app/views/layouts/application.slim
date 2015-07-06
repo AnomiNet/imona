@@ -1,7 +1,7 @@
 doctype html
 html
   head
-    title Anomi
+    title= content_for?(:title) ? content_for(:title) : 'Anomi'
     = stylesheet_link_tag 'application', media: 'all'
     = csrf_meta_tags
 body.layout-full
@@ -9,10 +9,18 @@ body.layout-full
   header
     .table.wrap
       .tr
-        .td.logo
+        .td.logo-box
           = link_to root_path do
-            = image_tag 'anomi-carrot-64', style: 'height: 32px; width: 32px;'
-            span.text Anomi
+            = image_tag 'anomi-carrot-56', style: 'height: 28px; width: 28px;'
+            span.location
+              - if content_for?(:header)
+                = sized_tag( :span, content_for(:header), 200, base_size: 1.25 )
+              - else
+                span[ style='font-size: 1.25em;' ] Anomi
+
+        nav.td
+          = nav_link( 'top', root_path )
+          = nav_link( 'new', root_path )
 
         .td.user
           - if current_user
@@ -30,8 +38,9 @@ body.layout-full
         div #{key}: #{messages}
   
   - if current_user
-  = link_to 'New Post', new_post_path
+    = link_to 'New Post', new_post_path
 
-  = yield
+  .content
+    = yield
 
   / = javascript_include_tag 'application'
