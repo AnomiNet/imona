@@ -7,26 +7,30 @@ html
 body.layout-full
 
   header
-    h1.logo
-      = link_to 'Anomi', root_path
+    .table.wrap
+      .tr
+        .td.logo
+          = link_to root_path do
+            = image_tag 'anomi-carrot-64', style: 'height: 32px; width: 32px;'
+            span.text Anomi
 
-    .user
-      - if current_user
-        = current_user.handle
-        / Currently destroys user account
-        = button_to 'X', logout_path, method: :delete
-        hr
-        = link_to 'New Post', new_post_path
-      - else
-        = form_tag users_path, method: :post do
-          = text_field_tag 'user[handle]', '', placeholder: 'Handle'
-          = submit_tag 'Sign up'
+        .td.user
+          - if current_user
+            = current_user.handle
+            / Currently destroys user account
+            = button_to 'x', logout_path, method: :delete
+          - else
+            = form_tag users_path, method: :post do
+              = text_field_tag 'user[handle]', '', placeholder: 'Handle'
+              = submit_tag 'Sign up'
 
-    / Flashes
-    - if flash.present?
-      .flash-messages
-        - flash.each do |key, messages|
-          div #{key}: #{messages}
+  - if flash.present?
+    .flash-messages
+      - flash.each do |key, messages|
+        div #{key}: #{messages}
+  
+  - if current_user
+  = link_to 'New Post', new_post_path
 
   = yield
 

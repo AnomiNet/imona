@@ -1,0 +1,21 @@
+.input-editable
+  background: $color-form-input-bg
+  border: 1px solid $color-form-input-border
+  color: $color-text-strong
+  padding: 3px
+
+input
+  &[type='color'], &[type='datetime'], &[type='datetime-local'], &[type='date'], &[type='email'], &[type='month'], &[type='number'], &[type='range'], &[type='search'], &[type='time'], &[type='text'], &[type='url']
+    @extend .input-editable
+
+textarea
+  @extend .input-editable
+
+input[type='submit'], button
+  @extend .input-editable
+  background: $color-form-button-bg
+  color: $color-form-button-text
+
+// Rails #button_to helper
+form.button_to
+  display: inline

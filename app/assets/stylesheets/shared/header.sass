@@ -1,0 +1,26 @@
+.layout-full
+  header
+    @extend .boxy
+    background: $color-header-bg
+    border-bottom: 1px solid $color-header-border
+    display: table
+    padding: 2px
+    width: 100%
+    .table.wrap
+      width: 100%
+      .td
+        vertical-align: middle
+    .logo
+      a
+        color: #eee
+        font-size: 1.25em
+        text-decoration: none
+        & > *
+          vertical-align: middle
+      img
+        height: 32px
+        width: 32px
+      .text
+    .user
+      text-align: right
+      width: 300px
