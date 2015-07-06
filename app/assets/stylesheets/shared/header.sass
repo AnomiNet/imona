@@ -1,42 +1,37 @@
-.layout-full
-  header
-    @extend .boxy
-    background: $color-header-bg
-    border-bottom: 1px solid $color-header-border
-    display: table
-    padding: 2px
+.layout-full > header
+  @extend .boxy
+  background: $color-header-bg
+  border-bottom: 1px solid $color-header-border
+  display: table
+  padding: 2px
+  width: 100%
+  .table.wrap
     width: 100%
-    .table.wrap
-      width: 100%
-      .td
-        vertical-align: bottom
-    .logo-box
-      @extend .no-overflow
-      width: 200px
-      a
-        color: $color-text-strong
-        text-decoration: none
-        & > *
-          vertical-align: middle
-      .location
-        display: inline-block
-        position: relative
-        top: 2px
-    nav
-      a
-        color: $color-text-strong
-        font-weight: bold
-        font-size: 1.2em
-        position: relative
-        top: -3px
-        &:not(:last-child)
-          margin-right: 10px
-        &.active
-          color: $color-link
-    .user
-      text-align: right
-      width: 300px
-
-  .content
-    margin: 0 auto 0 200px
-    width: 800px
+    .td
+      vertical-align: bottom
+  .logo-box
+    @extend .no-overflow
+    width: 200px
+    a
+      color: $color-text-strong
+      text-decoration: none
+      & > *
+        vertical-align: middle
+    .location
+      display: inline-block
+      position: relative
+      top: 2px
+  nav
+    a
+      color: $color-text-strong
+      font-weight: bold
+      font-size: 1.2em
+      position: relative
+      top: -3px
+      &:not(:last-child)
+        margin-right: 10px
+      &.active
+        color: $color-link
+  .user
+    text-align: right
+    width: 300px

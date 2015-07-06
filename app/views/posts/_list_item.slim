@@ -1,24 +1,27 @@
 / Locals: post
-.post
-  .voter
-    .wrap
-      .inner-wrap
-        .arrow-wrap
-          .vote.up &nbsp;
-    .wrap
-      .score #{ post.score }
-    .wrap
-      .inner-wrap
-        .arrow-wrap
-          .vote.down &nbsp;
-  h2.tldr
-    = link_to by_context_post_path(post) do
-      span.link-body #{ post.score } pts / #{ post.tldr }
-  h3.url #{ post.url }
-  h3.body #{ post.body }
-  h4.user By: #{ post.user.handle }
-  .created_at #{ human_time( post.created_at ) } ago
-  .parent In reply to: #{ post.parent_id }
-  .depth Depth: #{ post.depth }
-  .children Replies: #{ post.child_ids }
-  .id ID: #{ post.id }
+.post.table
+  .tr
+    .td.voter-wrap
+      / Voter is display: table so it needs to be its own element.
+      .voter
+        .wrap
+          .inner-wrap
+            .arrow-wrap
+              .vote.up &nbsp;
+        .wrap
+          .score #{ post.score }
+        .wrap
+          .inner-wrap
+            .arrow-wrap
+              .vote.down &nbsp;
+    .td.content
+      h2.tldr
+        = link_to post.tldr, by_context_post_path(post)
+      h3.url #{ post.url }
+      h3.body #{ post.body }
+      h4.user By: #{ post.user.handle }
+      .created_at #{ human_time( post.created_at ) } ago
+      .parent In reply to: #{ post.parent_id }
+      .depth Depth: #{ post.depth }
+      .children Replies: #{ post.child_ids }
+      .id ID: #{ post.id }
