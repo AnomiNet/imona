@@ -4,22 +4,26 @@ Official frontend for the [Anomi API](https://github.com/AnomiNet/anomi) built w
 
 **TODO** This code runs https://www.anomi.net/.
 
+## Development
 
-## Setup
+### Install dependencies
+
+```sh
+bundle install
+rake bower:install
+```
 
 ### Secrets
 
-Before booting the app you must configure the app secrets.
+Rails secret key and other secrets are configured in `config/secrets.yml`, ignored by .gitignore.
 
-`cp config/secrets.yml.example config/secrets.yml` and follow the instructions in the file.
+`cp config/secrets.yml.example config/secrets.yml` and follow instructions inline.
 
-## Development
-
-#### Verbose mode
+### Verbose mode
 
 Set the `V` env var when booting, e.g. `V=1 rails c`.
 
-### Deployment
+## Deployment
 
 **TODO** something something Docker zoom go
 

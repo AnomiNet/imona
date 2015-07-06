@@ -1,0 +1,7 @@
+// Manifest file.
+// Order of imports matter!
+
+//= require_tree ../../../vendor/assets/bower_components/.
+@import "config/**/*";
+@import "shared/**/*";
+@import "models/**/*";

@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem "bower-rails", '~> 0.9'
 gem 'faraday_middleware', '~> 0.9'
 gem 'her', '~> 0.7'
 gem 'puma', '~> 2.11'
