@@ -12,6 +12,11 @@
     cursor: pointer
     height: 10px
     padding: 5px
+    &:hover
+      .up
+        border-bottom-color: $color-voter-up
+      .down
+        border-top-color: $color-voter-down
   .arrow
     cursor: pointer
     display: inline-block
@@ -21,9 +26,19 @@
     @extend .arrow
     border-left: 10px solid transparent
     border-right: 10px solid transparent
-    border-bottom: 10px solid $color-voter-up
+    border-bottom: 10px solid $color-voter-default
   .down
     @extend .arrow
     border-left: 10px solid transparent
     border-right: 10px solid transparent
-    border-top: 10px solid $color-voter-up
+    border-top: 10px solid $color-voter-default
+  &[data-current-user-vote='1']
+    .up
+      border-bottom-color: $color-voter-up
+    .score
+      color: $color-voter-up
+  &[data-current-user-vote='-1']
+    .down
+      border-top-color: $color-voter-down
+    .score
+      color: $color-voter-down

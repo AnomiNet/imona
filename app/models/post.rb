@@ -1,7 +1,7 @@
 class Post
   include Her::Model
 
-  attributes :body, :child_ids, :created_at, :depth, :id, :parent_id, :root_id, :score, :tldr, :url, :user_handle, :user_id
+  attributes :body, :child_ids, :created_at, :current_user_vote, :depth, :id, :parent_id, :root_id, :score, :tldr, :url, :user_handle, :user_id
 
   has_one :user
 

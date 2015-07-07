@@ -10,7 +10,14 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :votes, only: [] do
+    collection do
+      post :create_or_update
+    end
+  end
+
   resources :users, only: [:create, :show]
+
 
   delete '/logout' => 'sessions#destroy', as: :logout
 end

@@ -3,7 +3,7 @@
   .tr
     .td.voter-wrap
       / Voter is display: table so it needs to be its own element.
-      .voter
+      .voter[ data-current-user-vote="#{ post.current_user_vote }" ]
         .wrap
           .inner-wrap
             .arrow-wrap
