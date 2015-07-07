@@ -3,12 +3,15 @@
   background: $color-header-bg
   border-bottom: 1px solid $color-header-border
   display: table
-  padding: 2px
+  padding: 1px
   width: 100%
   .table.wrap
     width: 100%
     .td
-      vertical-align: bottom
+      vertical-align: middle
+  nav, .user
+    position: relative
+    top: 2px
   .logo-box
     @extend .no-overflow
     width: 200px
@@ -26,8 +29,6 @@
       color: $color-text-strong
       font-weight: bold
       font-size: 1.2em
-      position: relative
-      top: -3px
       &:not(:last-child)
         margin-right: 10px
       &.active
@@ -35,3 +36,12 @@
   .user
     text-align: right
     width: 300px
+    .logged-in-actions
+      margin-right: 15px
+      a
+        color: $color-text-strong
+        font-weight: bold
+    .handle
+      margin-right: 5px
+      a
+        color: $color-text

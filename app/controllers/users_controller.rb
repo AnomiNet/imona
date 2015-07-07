@@ -19,6 +19,12 @@ class UsersController < ApplicationController
       flash[:alert] = "Couldn't create user."
     end
 
-    redirect_to :back
+    redirect_to user_path( id: @user.handle )
+  end
+
+  def show
+    # TODO: Find users
+    # Just yourself for now!
+    @user = current_user
   end
 end

@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   def destroy
     logout_user
-    flash[:notice] = "Logged out."
-    redirect_to root_path
+    @current_user = nil
+    RequestStore.store[:user_token] = nil
   end
 end

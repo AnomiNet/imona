@@ -1,0 +1,11 @@
+- if @user
+  - header current_user.handle
+  p This is you!
+  h2 Yolo zone
+  p so scare
+  = button_to 'Delete my account', logout_path, method: :delete, class: 'btn-yolo'
+
+- else
+  - header 404
+  p Who's that?
+  p It's lonely here. Why don't you register and be my friend?

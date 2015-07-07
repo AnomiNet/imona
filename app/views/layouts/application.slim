@@ -17,16 +17,17 @@ body.layout-full
                 = sized_tag( :span, content_for(:header), 200, base_size: 1.25 )
               - else
                 span[ style='font-size: 1.25em;' ] Anomi
-
+  
         nav.td
           = nav_link( 'top', root_path )
           = nav_link( 'new', root_path )
 
         .td.user
           - if current_user
-            = current_user.handle
-            / Currently destroys user account
-            = button_to 'x', logout_path, method: :delete
+            span.logged-in-actions
+              = link_to 'New Post', new_post_path
+            span.handle
+              = link_to current_user.handle, user_path( id: current_user.handle )
           - else
             = form_tag users_path, method: :post do
               = text_field_tag 'user[handle]', '', placeholder: 'Handle'
@@ -37,9 +38,6 @@ body.layout-full
       - flash.each do |key, messages|
         div #{key}: #{messages}
   
-  - if current_user
-    = link_to 'New Post', new_post_path
-
   .content
     = yield
 
