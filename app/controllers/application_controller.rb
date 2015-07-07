@@ -1,4 +1,7 @@
 class ApplicationController < ActionController::Base
+
+  include ViewControllerHelper
+
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
@@ -10,15 +13,6 @@ class ApplicationController < ActionController::Base
 
   protected def set_user_token
     RequestStore.store[:user_token] = current_user.token
-  end
-
-  def current_user
-    @current_user ||= load_current_user
-  end
-
-  def load_current_user
-    return nil if session[:user].blank?
-    User.new( session[:user] )
   end
 
   # Assign login cookie for a user.
