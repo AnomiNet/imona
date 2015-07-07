@@ -18,4 +18,9 @@ class Post
       id: user_id
     )
   end
+
+  def parent_id
+    super_val = super
+    super_val == 0 ? nil : super_val
+  end
 end
