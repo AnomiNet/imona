@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
   root to: 'posts#top'
 
-  resources :posts, only: [:create, :index, :new] do
+  resources :posts, only: [:create, :new] do
     collection do
       get :top
+    end
+    member do
+      get :context
     end
   end
 

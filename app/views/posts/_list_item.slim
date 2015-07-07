@@ -16,7 +16,7 @@
               .vote.down &nbsp;
     .td.content
       h2.tldr
-        = link_to post.tldr, by_context_post_path(post)
+        = link_to post.tldr, context_post_path(post)
       h3.url #{ post.url }
       h3.body #{ post.body }
       h4.user By: #{ post.user.handle }
