@@ -1,4 +1,35 @@
 .post
-  margin-left: -5px
-  .voter-wrap
-    padding: 0 5px
+  // Mini reset
+  h1, h2, h3, h4, h5, p
+    font-weight: normal
+    margin: 0
+  // ---
+  background: $color-content-bg
+  margin: 0 0 7px -5px
+  padding: 5px
+  width: 100%
+  & > .tr > .td
+    vertical-align: top
+  .score-wrap
+    margin-right: 5px
+    position: relative
+    text-align: center
+    width: 45px
+    .score
+      @extend .abs-center
+      font-size: 1.5em
+      height: 1.5em
+      right: 5px
+  .content
+    & > *:not(:last-child)
+      margin-bottom: 3px
+    .parent
+    .depth
+      color: $color-text-weak
+      font-size: 0.9em
+      margin-left: 3px
+    .user
+      .handle
+        color: $color-text-strong
+  .voter-mini
+    margin-right: 5px
