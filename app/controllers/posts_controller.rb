@@ -37,7 +37,7 @@ class PostsController < ApplicationController
   def create_reply
     @post_parent = Post.find( params[:id] )
     @post = Post.new( params[:post] )
-    @post.parent_id = params[:id]
+    @post.parent_id = params[:id].to_i
     if @post.save
       flash[:notice] = "Post created :)"
       redirect_to context_post_path(@post)
