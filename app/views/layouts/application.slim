@@ -31,10 +31,10 @@ body.layout-full
           - else
             = form_tag users_path, method: :post do
               = text_field_tag 'user[handle]', '', placeholder: 'Handle'
-              = submit_tag 'Sign up'
+              = submit_tag 'Sign up', class: 'btn-happy'
 
   - if flash.present?
-    .flash-messages
+    .flash
       - flash.each do |key, messages|
         div #{key}: #{messages}
   
