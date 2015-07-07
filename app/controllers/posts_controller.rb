@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   # Thread Detail view
   def context
     @posts = Post.by_context( params[:id] )
-    @post = @posts.first
+    @post = @posts.shift
     # TODO: Build tree of posts
   end
 
