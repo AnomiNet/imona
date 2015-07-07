@@ -28,4 +28,22 @@ class PostsController < ApplicationController
   def new
     @post = Post.new
   end
+
+  def new_reply
+    @post_parent = Post.find( params[:id] )
+    @post = Post.new( parent_id: params[:id] )
+  end
+
+  def create_reply
+    @post_parent = Post.find( params[:id] )
+    @post = Post.new( params[:post] )
+    @post.parent_id = params[:id]
+    if @post.save
+      flash[:notice] = "Post created :)"
+      redirect_to context_post_path(@post)
+    else
+      flash[:alert] = "Couldn't create post!"
+      redirect_to :back
+    end
+  end
 end

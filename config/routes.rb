@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     end
     member do
       get :context
+      get :new_reply
+      post :create_reply
     end
   end
 

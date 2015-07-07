@@ -1,0 +1,24 @@
+/ Locals: post
+/ HACK: Copypasta of _list_item
+.post-detail.table
+  .tr
+    .td.score-wrap
+      .score= post.direct_child_ids.try(:size) || 0
+    .td.content
+      h2.tldr
+        = link_to post.tldr, context_post_path(post)
+      - if post.url
+        h3.url= link_to post.url, post.url
+      - if post.parent_id
+        .parent
+          span.label Parent&nbsp;
+          = link_to( "##{ post.parent_id }", context_post_path( id: post.parent_id ) )
+          span.depth
+            span.label  Depth
+            span.magnitude= " #{ post.depth }"
+      .metadata
+        = render partial: 'votes/control_mini', locals: { content: post }
+        span.created_at #{ human_time( post.created_at ) } ago
+        span.user
+          span.label  by
+          span.handle= " #{ post.user.handle }"

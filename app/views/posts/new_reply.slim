@@ -1,0 +1,20 @@
+- header "RE: #{ @post.tldr }"
+
+= render partial: 'detail', locals: { post: @post_parent }
+
+h2 Reply
+= form_for @post, url: create_reply_post_path( id: @post_parent.id ) do |f|
+  table
+    - f.hidden_field :parent_id
+    tr.form-field
+      td= f.label :url
+      td= f.text_field :url
+    tr.form-field
+      td= f.label :body
+      td= f.text_area :body
+    tr.form-field
+      td= f.label :tldr
+      td= f.text_field :tldr
+    tr.form-field
+      td[ colspan=2 ]
+        = f.submit 'Submit', class: 'btn-happy'

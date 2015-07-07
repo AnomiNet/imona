@@ -1,15 +1,2 @@
 - header 'New Post'
-= form_for @post do |f|
-  table
-    tr.form-field
-      td= f.label :url
-      td= f.text_field :url
-    tr.form-field
-      td= f.label :body
-      td= f.text_area :body
-    tr.form-field
-      td= f.label :tldr
-      td= f.text_field :tldr
-    tr.form-field
-      td[ colspan=2 ]
-        = f.submit 'Submit', class: 'btn-happy'
+= render partial: 'form', locals: { post: @post }

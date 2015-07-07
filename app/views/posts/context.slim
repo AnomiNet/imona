@@ -1,4 +1,9 @@
 - title @post.tldr
 - header @post.tldr
 
+= render partial: 'detail', locals: { post: @post }
+
+p
+  = link_to 'Reply', new_reply_post_path( id: @post.id ), class: 'btn-happy'
+
 = render partial: 'list', locals: { posts: @posts }

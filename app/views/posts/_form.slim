@@ -1,0 +1,17 @@
+/ Locals: post, url
+- url = nil if !local_assigns[:url]
+
+= form_for post, url: url do |f|
+  table
+    tr.form-field
+      td= f.label :url
+      td= f.text_field :url
+    tr.form-field
+      td= f.label :body
+      td= f.text_area :body
+    tr.form-field
+      td= f.label :tldr
+      td= f.text_field :tldr
+    tr.form-field
+      td[ colspan=2 ]
+        = f.submit 'Submit', class: 'btn-happy'

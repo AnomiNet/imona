@@ -4,6 +4,7 @@ class Post
   attributes :body, :direct_child_ids, :created_at, :current_user_vote, :depth, :id, :parent_id, :root_id, :score, :tldr, :url, :user_handle, :user_id
 
   has_one :user
+  has_many :posts
 
   # Thread detail; what you see when you click on a Post.
   scope :by_context, ->(id) { get( "/posts/#{id}/context" ) }
