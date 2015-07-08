@@ -33,9 +33,51 @@
         color: $color-text-strong
   .voter-mini
     margin-right: 5px
+  .id
+    color: $color-text-ninja
+    padding-right: 5px
+    vertical-align: middle !important
+    width: 1px
 
 .post-detail
   @extend .post
+  background-color: $color-post-detail-bg
+  padding: 10px 5px
+  .tldr
+    a
+      color: $color-post-detail-text
+  .content
+    & > *:not(:last-child)
+      margin-bottom: 5px
+  .metadata
+    margin-bottom: 10px
+  .body
+    color: $color-post-detail-text
+    font-size: 1.2em
 
-.post-reply
+.post-reply-wrap
+  width: 100%
+  .reply-indent
+    @for $i from 1 through 4
+      &.depth-#{$i}
+        padding-left: #{ 20px * $i }
+  .post-reply
+    @extend .post
+
+.post-parent
   @extend .post
+  background: $color-post-parent-bg
+  color: $color-text-weak
+  padding: 2px 5px
+  .parent-label
+    font-size: 0.9em
+    vertical-align: middle !important
+    width: 50px
+    a
+      color: $color-text-weak
+  .score-wrap .score
+    font-size: 1.2em
+  .tldr, .url
+    font-size: 1.1em
+  .parent, .metadata
+    font-size: 0.9em

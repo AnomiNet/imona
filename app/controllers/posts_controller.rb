@@ -6,7 +6,13 @@ class PostsController < ApplicationController
   def context
     @posts = Post.by_context( params[:id] )
     @post = @posts.shift
-    # TODO: Build tree of posts
+    @post_parent = nil
+    if @post.parent_id
+      post_parent_index = @posts.find_index{ |p| p.id == @post.parent_id }
+      if post_parent_index
+        @post_parent = @posts.delete_at(post_parent_index)
+      end
+    end
   end
 
   # Homepage

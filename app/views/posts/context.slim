@@ -1,9 +1,10 @@
 - title @post.tldr
 - header @post.tldr
 
+- if @post_parent
+  = render partial: 'parent', locals: { post: @post_parent }
+
 = render partial: 'detail', locals: { post: @post }
 
-p
-  = link_to 'Reply', new_reply_post_path( id: @post.id ), class: 'btn-happy'
-
-= render partial: 'reply', collection: @posts, as: :post
+- @posts.each do |post|
+  = render partial: 'reply', locals: { post: post, rel_root_depth: @post.depth }

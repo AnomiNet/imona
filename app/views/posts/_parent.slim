@@ -1,6 +1,8 @@
 / Locals: post
-.post.table
+.post-parent.table
   .tr
+    .td.parent-label
+      = link_to 'Parent', context_post_path( id: post.id )
     .td.score-wrap
       .score= post.direct_child_ids.try(:size) || 0
     .td.content
@@ -21,4 +23,6 @@
         span.user
           span.label  by
           span.handle= " #{ post.user.handle }"
-    .td.id= "##{ post.id }"
+        span &nbsp;
+        = link_to 'Reply', new_reply_post_path( id: post.id ), class: 'btn-happy'
+    .td.id= post.id
