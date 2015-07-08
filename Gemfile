@@ -8,6 +8,7 @@ gem 'rails', '~> 4.2'
 gem 'request_store', '~> 1.1'
 gem 'sass-rails', '~> 5.0'
 gem 'slim', '~> 3.0'
+gem 'sprockets-es6', '~> 0.6'
 gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
