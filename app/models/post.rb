@@ -1,5 +1,5 @@
 class Post
-  include Her::Model
+  include ApiModel
 
   attributes :body, :direct_child_ids, :created_at, :current_user_vote, :depth, :id, :parent_id, :root_id, :score, :tldr, :url, :user_handle, :user_id
 

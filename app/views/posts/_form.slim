@@ -2,6 +2,7 @@
 - url = nil if !local_assigns[:url]
 
 = form_for post, url: url do |f|
+  = render partial: 'shared/api_model_errors', locals: { record: post } if post.errors?
   table
     tr.form-field
       td= f.label :url

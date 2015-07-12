@@ -1,0 +1,9 @@
+/ When you save a Her model and it fails at the API level, these errors are
+/ stored as #response_errors.
+/ Her model #errors contain local validation errors.
+/ Locals: record
+ul.errors
+  - record.errors.full_messages.each do |error|
+    li.local-error= error
+  - record.response_errors.each do |error|
+    li.api-error= error

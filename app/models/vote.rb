@@ -1,5 +1,5 @@
 class Vote
-  include Her::Model
+  include ApiModel
 
   attributes :post_id, :user_handle, :vector
 end

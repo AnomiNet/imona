@@ -26,8 +26,8 @@ class PostsController < ApplicationController
       flash[:notice] = "Post created :)"
       redirect_to context_post_path(@post)
     else
-      flash[:alert] = "Couldn't create post!"
-      redirect_to :back
+      flash.now[:alert] = "Couldn't create post!"
+      render :new
     end
   end
 

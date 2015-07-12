@@ -1,5 +1,5 @@
 class User
-  include Her::Model
+  include ApiModel
 
   attributes :handle, :token
   validates :handle, presence: true

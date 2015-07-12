@@ -4,10 +4,11 @@ Her::API.setup url: Rails.application.secrets.api_url do |c|
   c.use FaradayMiddleware::EncodeJson
 
   # Response
+  c.use Her::Middleware::DefaultParseJSON
+  c.use ApiResponseNormalizer
   if ENV['V'] and Rails.env.development?
     c.use Faraday::Response::Logger
   end
-  c.use Her::Middleware::DefaultParseJSON
 
   # Adapter
   c.use Faraday::Adapter::NetHttp
