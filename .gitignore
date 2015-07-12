@@ -17,3 +17,6 @@ secrets.yml
 
 # Ignore bower
 /vendor/assets/bower_components
+
+/vendor/bundle
+/vendor/cache

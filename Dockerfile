@@ -7,21 +7,21 @@ RUN \
 RUN curl -sL https://deb.nodesource.com/setup_0.12 | bash -
 RUN apt-get install -y --no-install-recommends nodejs
 
-ENV APP_HOME /myapp
+ENV APP_HOME /imona
 RUN mkdir $APP_HOME
 WORKDIR $APP_HOME
 
-ADD Gemfile* $APP_HOME/
+ADD . $APP_HOME
 
 ENV BUNDLE_GEMFILE=$APP_HOME/Gemfile \
   BUNDLE_JOBS=4 \
-  BUNDLE_PATH=/bundle
-#  BUNDLE_WITHOUT=development:test
+  BUNDLE_PATH=/bundle \
+  BUNDLE_WITHOUT=development:test
 
 RUN gem install bundler
 
-RUN bundle install --deployment
+RUN bundle install --local
 
-ADD . $APP_HOME
+EXPOSE 9292
 
 CMD ["./run.sh"]
