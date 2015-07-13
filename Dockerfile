@@ -1,27 +1,54 @@
 FROM debian:jessie
 
-RUN \
-  apt-get update -qq && \
-  apt-get install -y --no-install-recommends build-essential curl libssl-dev ruby ruby-dev zlib1g-dev
+# Config
+# ---
+ENV APP_HOME /opt/imona
+ENV BUNDLE_JOBS 8
+ENV GIT_BRANCH docker2
+ENV RAILS_ENV production
 
-RUN curl -sL https://deb.nodesource.com/setup_0.12 | bash -
-RUN apt-get install -y --no-install-recommends nodejs
+RUN apt-get update && \
+  apt-get install -y --no-install-recommends \
+  build-essential \
+  # curl \
+  git-core \
+  libssl-dev \
+  ruby ruby-dev \
+  zlib1g-dev && \
+  gem install bundler
 
-ENV APP_HOME /myapp
-RUN mkdir $APP_HOME
+# node for bower
+# RUN curl -sL https://deb.nodesource.com/setup_0.12 | bash -
+# RUN apt-get install -y --no-install-recommends \
+#   nodejs && \
+#   npm install bower -g
+
 WORKDIR $APP_HOME
 
+# Using ADD instead of COPY lets Docker cache bundle install.
 ADD Gemfile* $APP_HOME/
 
-ENV BUNDLE_GEMFILE=$APP_HOME/Gemfile \
-  BUNDLE_JOBS=4 \
-  BUNDLE_PATH=/bundle
-#  BUNDLE_WITHOUT=development:test
+RUN bundle install \
+  --deployment \
+  --without development \
+  --without test
 
-RUN gem install bundler
+# This step invalidates cache
+RUN git init && \
+  git remote add -t $GIT_BRANCH origin https://github.com/AnomiNet/imona.git && \
+  git fetch && \
+  git reset --hard origin/$GIT_BRANCH
+COPY config/secrets.yml $APP_HOME/secrets.yml
 
-RUN bundle install --deployment
+# HACK: For some reason I have to run this again.
+RUN bundle install
 
-ADD . $APP_HOME
+# HACK: I regret my choice of bower
+# To avoid installing nodejs, install it on the dev machine and install there
+# then just copy them over.
+ADD ./vendor/assets/bower_components $APP_HOME/vendor/assets/bower_components
 
-CMD ["./run.sh"]
+# Compile Rails assets
+RUN bundle exec rake assets:precompile
+
+CMD ["/usr/local/bin/bundle", "exec", "puma"]
