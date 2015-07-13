@@ -4,7 +4,7 @@ FROM debian:jessie
 # ---
 ENV APP_HOME /opt/imona
 ENV BUNDLE_JOBS 8
-ENV GIT_BRANCH docker2
+ENV GIT_BRANCH master
 # NOTE: if you change env change it at the very bottom CMD
 ENV RAILS_ENV production
 
