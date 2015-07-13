@@ -16,7 +16,9 @@ RUN apt-get update && \
   # curl \
   git-core \
   libssl-dev \
-  ruby ruby-dev \
+  libv8-dev \
+  ruby \
+  ruby-dev \
   zlib1g-dev && \
   gem install bundler
 
@@ -30,6 +32,8 @@ WORKDIR $APP_HOME
 
 # Using ADD instead of COPY lets Docker cache bundle install.
 ADD Gemfile* $APP_HOME/
+
+RUN bundle config build.libv8 --with-system-v8
 
 RUN bundle install \
   --deployment \
@@ -58,5 +62,6 @@ RUN bundle exec rake assets:precompile
 EXPOSE 80
 
 ENTRYPOINT ["/usr/local/bin/bundle", "exec"]
+
 # NOTE: if you change env change it here too
 CMD ["puma", "-p", "80", "-e", "production"]
