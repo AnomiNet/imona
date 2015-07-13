@@ -5,7 +5,10 @@ FROM debian:jessie
 ENV APP_HOME /opt/imona
 ENV BUNDLE_JOBS 8
 ENV GIT_BRANCH docker2
+# NOTE: if you change env change it at the very bottom CMD
 ENV RAILS_ENV production
+
+RUN export RAILS_ENV=$RAILS_ENV
 
 RUN apt-get update && \
   apt-get install -y --no-install-recommends \
@@ -30,25 +33,30 @@ ADD Gemfile* $APP_HOME/
 
 RUN bundle install \
   --deployment \
-  --without development \
-  --without test
+  --full-index \
+  --jobs $BUNDLE_JOBS \
+  --without development test
 
 # This step invalidates cache
 RUN git init && \
   git remote add -t $GIT_BRANCH origin https://github.com/AnomiNet/imona.git && \
   git fetch && \
   git reset --hard origin/$GIT_BRANCH
-COPY config/secrets.yml $APP_HOME/secrets.yml
+COPY config/secrets.yml $APP_HOME/config/secrets.yml
 
 # HACK: For some reason I have to run this again.
-RUN bundle install
+# RUN bundle install
 
 # HACK: I regret my choice of bower
 # To avoid installing nodejs, install it on the dev machine and install there
 # then just copy them over.
-ADD ./vendor/assets/bower_components $APP_HOME/vendor/assets/bower_components
+COPY ./vendor/assets/bower_components $APP_HOME/vendor/assets/bower_components
 
 # Compile Rails assets
 RUN bundle exec rake assets:precompile
 
-CMD ["/usr/local/bin/bundle", "exec", "puma"]
+EXPOSE 80
+
+ENTRYPOINT ["/usr/local/bin/bundle", "exec"]
+# NOTE: if you change env change it here too
+CMD ["puma", "-p", "80", "-e", "production"]
