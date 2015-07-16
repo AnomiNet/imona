@@ -18,12 +18,12 @@ class ApplicationController < ActionController::Base
   # Assign login cookie for a user.
   # Token is only returned after a user is created. (UsersController #create)
   def login_user(user)
-    cookies.permanent[:user_handle] = user.handle
+    session[:user_handle] = user.handle
     cookies.permanent[:user_token] = user.token
   end
 
   def logout_user
-    cookies.delete(:user_handle)
+    session.delete(:user_handle)
     cookies.delete(:user_token)
   end
 end
