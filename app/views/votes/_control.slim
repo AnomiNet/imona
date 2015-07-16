@@ -1,13 +1,13 @@
 / Locals: content
 / Voter is display: table so it needs to be its own element.
-.voter[ data-current-user-vote="#{ content.current_user_vote }" ]
+.voter[ data-js-role="vote-control" data-current-user-vote="#{ content.current_user_vote }" data-content-id="#{ content.id }" data-content-type='post' ]
   .wrap
     .inner-wrap
       .arrow-wrap
-        .vote.up &nbsp;
+        .vote.up[ data-js-role="button" data-value="1" ] &nbsp;
   .wrap
     .score #{ content.score }
   .wrap
     .inner-wrap
       .arrow-wrap
-        .vote.down &nbsp;
+        .vote.down[ data-js-role="button" data-value="-1" ] &nbsp;

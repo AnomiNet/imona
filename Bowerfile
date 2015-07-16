@@ -1,4 +1,10 @@
 # A sample Bowerfile
 # Check out https://github.com/42dev/bower-rails#ruby-dsl-configuration for more options
 
-asset 'normalize.css'
+group :vendor, :assets_path => "assets/javascripts" do
+  asset 'qwest'
+end
+
+group :vendor, :assets_path => "assets/stylesheets"  do
+  asset 'normalize.css'
+end

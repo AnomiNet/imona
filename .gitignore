@@ -16,4 +16,5 @@
 secrets.yml
 
 # Ignore bower
-/vendor/assets/bower_components
+/vendor/assets/javascripts/bower_components
+/vendor/assets/stylesheets/bower_components

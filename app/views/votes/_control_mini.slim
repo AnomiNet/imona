@@ -1,7 +1,7 @@
 / Locals: content
 / Voter is display: table so it needs to be its own element.
-.voter-mini[ data-current-user-vote="#{ content.current_user_vote }" ]
+.voter-mini[ data-js-role="vote-control" data-current-user-vote="#{ content.current_user_vote }" data-content-id="#{ content.id }" data-content-type='post' ]
   .arrow-wrap
-    .vote.up &nbsp;
+    .vote.up[ data-js-role="button" data-value="1" ] &nbsp;
   .arrow-wrap
-    .vote.down &nbsp;
+    .vote.down[ data-js-role="button" data-value="-1" ] &nbsp;

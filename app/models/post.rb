@@ -7,7 +7,7 @@ class Post
   has_many :posts
 
   # Thread detail; what you see when you click on a Post.
-  scope :by_context, ->(id) { get( "/posts/#{id}/context" ) }
+  scope :by_context, ->(id) { get( "posts/#{id}/context" ) }
 
   # Home page "Top Posts" listing.
   scope :top, -> { where( scope: 'top' ) }
