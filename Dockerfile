@@ -54,7 +54,7 @@ COPY config/secrets.yml $APP_HOME/config/secrets.yml
 # HACK: I regret my choice of bower
 # To avoid installing nodejs, install it on the dev machine and install there
 # then just copy them over.
-COPY ./vendor/assets/bower_components $APP_HOME/vendor/assets/bower_components
+COPY ./vendor/assets $APP_HOME/vendor/assets
 
 # Compile Rails assets
 RUN bundle exec rake assets:precompile
