@@ -1,7 +1,8 @@
 / Locals: content
 / Voter is display: table so it needs to be its own element.
 .voter-mini[ data-js-role="vote-control" data-current-user-vote="#{ content.current_user_vote }" data-content-id="#{ content.id }" data-content-type='post' ]
-  .arrow-wrap
+  / HACK: Repeat here to get the button padding also clickable.
+  .arrow-wrap[ data-js-role="button" data-value="1" ]
     .vote.up[ data-js-role="button" data-value="1" ] &nbsp;
-  .arrow-wrap
+  .arrow-wrap[ data-js-role="button" data-value="-1" ]
     .vote.down[ data-js-role="button" data-value="-1" ] &nbsp;

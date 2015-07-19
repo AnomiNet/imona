@@ -45,11 +45,8 @@ RUN bundle install \
 RUN git init && \
   git remote add -t $GIT_BRANCH origin https://github.com/AnomiNet/imona.git && \
   git fetch && \
-  git reset --hard origin/$GIT_BRANCH
-COPY config/secrets.yml $APP_HOME/config/secrets.yml
-
-# HACK: For some reason I have to run this again.
-# RUN bundle install
+  git reset --hard origin/$GIT_BRANCH && \
+  cp config/secrets.yml.example config/secrets.yml
 
 # HACK: I regret my choice of bower
 # To avoid installing nodejs, install it on the dev machine and install there

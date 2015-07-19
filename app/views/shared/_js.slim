@@ -1,4 +1,4 @@
 javascript:
   Conf = {
-    apiUrl: "#{ Rails.application.secrets.api_url }"
+    apiUrl: "#{ Rails.application.secrets.api_url_external || '/api' }"
   };
