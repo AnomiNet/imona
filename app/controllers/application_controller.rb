@@ -9,7 +9,16 @@ class ApplicationController < ActionController::Base
   # User Auth stuff
   # ---
 
+  before_filter :set_x_forwarded_for
   before_filter :set_user_token, if: :current_user
+
+  # Notify the API for whom this request was intended.
+  # In deployment Rails is behind a reverse proxy such as HAProxy.
+  # These should append the X-Forwarded-For header to requests to identify
+  # users to prevent abuse.
+  protected def set_x_forwarded_for
+    RequestStore.store[:http_x_forwarded_for] = env['HTTP_X_FORWARDED_FOR'] || request.remote_ip
+  end
 
   protected def set_user_token
     RequestStore.store[:user_token] = current_user.token
