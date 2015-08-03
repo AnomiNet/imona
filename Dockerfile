@@ -4,7 +4,7 @@ FROM alpine:3.2
 # ---
 ENV APP_HOME /opt/imona
 ENV BUNDLE_JOBS 8
-ENV GIT_BRANCH docker-alpine
+ENV GIT_BRANCH docker-alpine-no-asset-deps
 # NOTE: if you change env change it at the very bottom CMD
 ENV RAILS_ENV production
 RUN export RAILS_ENV=$RAILS_ENV
@@ -37,7 +37,9 @@ RUN \
     nodejs \
     openssl-dev \
     ruby-dev \
-    zlib-dev && \
+    zlib-dev
+
+RUN \
   npm install bower -g && \
   bundle config build.nokogiri --use-system-libraries && \
   bundle install \
@@ -49,9 +51,19 @@ RUN \
   git remote add -t $GIT_BRANCH origin https://github.com/AnomiNet/imona.git && \
   git fetch && \
   git reset --hard origin/$GIT_BRANCH && \
-  cp config/secrets.yml.example config/secrets.yml && \
-  bundle exec rake bower:install['--allow-root --config.interactive=false'] && \
-  bundle exec rake assets:precompile && \
+  cp config/secrets.yml.example config/secrets.yml
+
+RUN \
+  ASSETS=1 bundle exec rake bower:install['--allow-root --config.interactive=false'] && \
+  ASSETS=1 bundle exec rake assets:precompile
+
+RUN \
+  rm -rfv .bundle && \
+  bundle install \
+    --deployment \
+    --full-index \
+    --jobs $BUNDLE_JOBS \
+    --without assets development test && \
   npm uninstall bower -g && \
   apk del --purge -r \
     g++ \
@@ -59,6 +71,7 @@ RUN \
     libxml2-dev \
     libxslt-dev \
     make \
+    nodejs \
     openssl-dev \
     ruby-dev \
     zlib-dev
