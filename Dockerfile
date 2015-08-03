@@ -1,45 +1,44 @@
-FROM debian:jessie
+FROM alpine:3.2
 
 # Config
 # ---
 ENV APP_HOME /opt/imona
 ENV BUNDLE_JOBS 8
-ENV GIT_BRANCH master
+ENV GIT_BRANCH dockerfile-alpine
 # NOTE: if you change env change it at the very bottom CMD
 ENV RAILS_ENV production
 
+
 RUN export RAILS_ENV=$RAILS_ENV
 
-RUN apt-get update && \
-  apt-get install -y --no-install-recommends \
-  build-essential \
-  # curl \
-  git-core \
-  libssl-dev \
-  libv8-dev \
-  ruby \
-  ruby-dev \
-  zlib1g-dev && \
-  gem install bundler
+RUN apk add --update ruby ruby-rdoc ruby-irb \
+                     ruby-bundler ruby-nokogiri\
+                     ruby-tzinfo ruby-rake\
+                     ruby-io-console ruby-bigdecimal
 
-# node for bower
-# RUN curl -sL https://deb.nodesource.com/setup_0.12 | bash -
-# RUN apt-get install -y --no-install-recommends \
-#   nodejs && \
-#   npm install bower -g
+# RUN apk add --update postgresql-client imagemagick nodejs
 
 WORKDIR $APP_HOME
 
 # Using ADD instead of COPY lets Docker cache bundle install.
 ADD Gemfile* $APP_HOME/
 
-RUN bundle config build.libv8 --with-system-v8
+RUN apk add --update g++ make libxml2-dev libxslt-dev zlib-dev \
+    git ruby-dev ruby-io-console && \
+    bundle config build.libv8 --with-system-v8 && \
+    bundle install \
+      --deployment \
+      --full-index \
+      --jobs $BUNDLE_JOBS \
+      --without development test && \
+    apk del — purge -r g++ make libxml2-dev \
+    libxslt-dev zlib-dev git ruby-dev
 
-RUN bundle install \
-  --deployment \
-  --full-index \
-  --jobs $BUNDLE_JOBS \
-  --without development test
+  # node for bower
+  # RUN curl -sL https://deb.nodesource.com/setup_0.12 | bash -
+  # RUN apt-get install -y --no-install-recommends \
+  #   nodejs && \
+  #   npm install bower -g
 
 # This step invalidates cache
 RUN git init && \
