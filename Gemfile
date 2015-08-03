@@ -10,8 +10,8 @@ gem 'sass-rails', '~> 5.0'
 gem 'slim', '~> 3.0'
 gem 'sprockets-es6', '~> 0.6'
 gem 'uglifier', '>= 1.3.0'
-# gem 'libv8', '~> 3.16'
-# gem 'therubyracer', '~> 0.12'
+gem 'libv8', '~> 3.16'
+gem 'therubyracer', '~> 0.12'
 
 group :development, :test do
   gem 'pry-byebug', '~> 3.1'

@@ -4,7 +4,7 @@ FROM alpine:3.2
 # ---
 ENV APP_HOME /opt/imona
 ENV BUNDLE_JOBS 8
-ENV GIT_BRANCH docker-alpine
+ENV GIT_BRANCH docker-alpine-therubyracer
 # NOTE: if you change env change it at the very bottom CMD
 ENV RAILS_ENV production
 RUN export RAILS_ENV=$RAILS_ENV
@@ -39,6 +39,7 @@ RUN \
     ruby-dev \
     zlib-dev && \
   npm install bower -g && \
+  bundle config build.libv8 --with-system-v8 && \
   bundle config build.nokogiri --use-system-libraries && \
   bundle install \
     --deployment \
@@ -59,6 +60,7 @@ RUN \
     libxml2-dev \
     libxslt-dev \
     make \
+    nodejs \
     openssl-dev \
     ruby-dev \
     zlib-dev
